@@ -161,13 +161,13 @@ const Login = (props) => {
                     <Slide direction="down" in={true} timeout={1000} mountOnEnter unmountOnExit >
                         <div>
                             <Typography className="text-center" variant="h3" gutterBottom>Inicio de Sesion</Typography>
-                            <Typography className="text-center" varian="h1"> <AccountCircleIcon style={{ fontSize: 80 }} color="secondary" className="icono" /></Typography>
+                            <Typography className="text-center" varian="h1"> <AccountCircleIcon style={{ fontSize: 80 }} id="menuC" color="secondary" className="icono" /></Typography>
                             <TextField fullWidth required onChange={cambiar} name="email" type="email" helperText="Ingresa tu correo" variant="outlined" label="Email"></TextField>
                             <TextField fullWidth required onChange={cambiar} name="password" type="password" helperText="Ingresa tu contraseña" variant="outlined" label="Password"></TextField>
                         </div>
                     </Slide>
                     <Slide direction="right" in={true} timeout={2000} mountOnEnter unmountOnExit >
-                        <Button endIcon={<ArrowForwardIcon />} onClick={iniciarSesion} variant="contained" fullWidth color="secondary">Iniciar Sesion</Button>
+                        <Button endIcon={<ArrowForwardIcon />} onClick={iniciarSesion} variant="contained" fullWidth color="primary" id="menu">Iniciar Sesion</Button>
                     </Slide>
                     <div className="mt-3">
                         <Grid container spacing={1} >

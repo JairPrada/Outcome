@@ -12,7 +12,7 @@ const Alerta = (props) => {
                 horizontal: 'center',
             }} onClose={props.handleClose}>
                 <Slide direction="up" in={true} timeout={1000} mountOnEnter unmountOnExit >
-                    <Alert onClose={props.handleClose} severity={props.tipo}>
+                    <Alert id={props.tipo} onClose={props.handleClose}  severity={props.tipo}>
                         {props.contenido}
                     </Alert>
                 </Slide>

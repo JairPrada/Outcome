@@ -4,3 +4,51 @@
 .bg-dark{
    background:black;
 }
+.m{
+    margin-top: 100px;
+  }
+  .mq{
+    margin-top:64px
+  }
+  .text-center{
+    text-align: center;
+  }
+  .icono{
+    height: 100px;
+  }
+  .mt{
+    margin-top: 200px;
+  }
+  .mt-3{
+    margin-top: 10px;
+  }
+  .mw{
+    margin:60px
+  }
+  .ava{
+    border-radius: 50%;
+  }
+  .margino{
+    margin-top: 500px;
+  }
+  .mb{
+    margin-bottom: 50px;
+  }
+  #text-white{
+    color: aliceblue;
+    text-decoration: none;
+  }
+  #menu{
+    background-color: #67008a;
+  }
+  #menuC{
+    color: #3a3a3a;
+  }
+  #error{
+    background-color: rgb(163, 13, 13);
+    color: white;
+  }
+  #success{
+    background-color: rgb(1, 114, 1);
+    color: white;
+  }

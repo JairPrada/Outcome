@@ -4,6 +4,7 @@ import './App.css';
 import Alerta from './Componentes/Moleculas/Alerta';
 import Rutas from './Componentes/Moleculas/Rutas';
 import Store from "./Redux/Store";
+import  "./Outcome.svg"
 
 
 function App(props) {

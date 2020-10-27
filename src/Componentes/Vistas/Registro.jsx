@@ -79,13 +79,13 @@ const Registro = (props) => {
     }
     return (
         <Fragment>
-            <Container maxWidth="xs">
+            <Container maxWidth="xs" className="roots">
                 <form className="m mb">
                     <Slide direction="down" in={true} timeout={1000} mountOnEnter unmountOnExit >
                         <div>
                             <Typography className="text-center" variant="h3" gutterBottom>Registrate</Typography>
-                            <Typography className="text-center" varian="h1"> <AccountCircleIcon style={{ fontSize: 80 }} color="secondary" className="icono" /></Typography>
-                            <TextField fullWidth label="Nombre" name="nombre" onChange={cambiar} helperText="Ingresa tu nombre" variant="outlined"></TextField>
+                            <Typography className="text-center" varian="h1"> <AccountCircleIcon style={{ fontSize: 80 }} color="secondary" id="menuC" className="icono" /></Typography>
+                            <TextField fullWidth label="Nombre" name="nombre" onChange={cambiar} helperText="Ingresa tu nombre" color="secondary" variant="outlined"></TextField>
                             <TextField fullWidth label="Apellido" name="apellido" onChange={cambiar} helperText="Ingresa tu apellido" variant="outlined"></TextField>
                             <TextField fullWidth label="Correo" name="correo" onChange={cambiar} type="email" helperText="Ingresa tu correo" variant="outlined"></TextField>
                             <TextField fullWidth label="Contraseña" name="contraseña" onChange={cambiar} type="password" helperText="Ingresa tu nombre" variant="outlined"></TextField>
@@ -93,7 +93,7 @@ const Registro = (props) => {
                         </div>
                     </Slide>
                     <Slide direction="right" in={true} timeout={2000} mountOnEnter unmountOnExit >
-                        <Button variant="contained" color="secondary" endIcon={<ArrowForwardIcon />} onClick={crearUsuario} fullWidth >Registrarse</Button>
+                        <Button variant="contained" id="menu" color="secondary"  endIcon={<ArrowForwardIcon />} onClick={crearUsuario} fullWidth >Registrarse</Button>
                     </Slide>
                 </form>
             </Container>

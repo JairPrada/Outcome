@@ -2,14 +2,15 @@ import { AppBar, Button, Grid, Hidden, Toolbar, Typography } from "@material-ui/
 import MenuIcon from '@material-ui/icons/Menu';
 import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
+import Outcome from "../../Outcome.svg"
 
 const Menu = () => {
     return (
         <Fragment>
-            <AppBar color="secondary">
+            <AppBar id="menu">
                 <Toolbar>
                     <Typography variant="h4" >
-                        Outcome
+                        <Button startIcon={<img src={Outcome} alt="icono" height="50px"></img>}><Typography variant="h5" id="text-white">OUTCOME</Typography></Button>
                     </Typography>
                     <Hidden smDown>
                         <Grid container>
