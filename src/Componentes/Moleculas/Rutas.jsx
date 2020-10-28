@@ -5,6 +5,7 @@ import Login from '../Vistas/Login';
 import Registro from '../Vistas/Registro';
 import Menu from './Menu';
 import Sesion from '../Vistas/Sesion';
+import EditarPerfil from "../Vistas/Usuarios Logeados/EditarPerfil";
 
 const Rutas = () => {
     return (
@@ -16,6 +17,7 @@ const Rutas = () => {
                     <Route path="/login" component={Login} />
                     <Route path="/registro" exact component={Registro} />
                     <Route path="/logeado" exact component={Sesion} />
+                    <Route path="/perfil" exact component={EditarPerfil}/>
                 </Switch>
             </Router>
         </React.Fragment>

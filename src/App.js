@@ -4,17 +4,21 @@ import './App.css';
 import Alerta from './Componentes/Moleculas/Alerta';
 import Rutas from './Componentes/Moleculas/Rutas';
 import Store from "./Redux/Store";
-import  "./Outcome.svg"
-
+import "./Outcome.svg"
+import { ThemeProvider } from '@material-ui/core';
+import theme from "./temaConfig";
 
 function App(props) {
   return (
-    <Fragment>
-      <Provider store={Store} >
-        <Rutas />
-        <Alerta/>
-      </Provider>
-    </Fragment>
+    <ThemeProvider theme={theme}>
+      <Fragment>
+        <Provider store={Store} >
+          <Rutas />
+          <Alerta />
+        </Provider>
+      </Fragment>
+    </ThemeProvider>
+
   );
 }
 

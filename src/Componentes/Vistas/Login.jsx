@@ -167,13 +167,13 @@ const Login = (props) => {
                         </div>
                     </Slide>
                     <Slide direction="right" in={true} timeout={2000} mountOnEnter unmountOnExit >
-                        <Button endIcon={<ArrowForwardIcon />} onClick={iniciarSesion} variant="contained" fullWidth color="primary" id="menu">Iniciar Sesion</Button>
+                        <Button endIcon={<ArrowForwardIcon />} onClick={iniciarSesion} variant="contained" fullWidth color="primary">Iniciar Sesion</Button>
                     </Slide>
                     <div className="mt-3">
                         <Grid container spacing={1} >
                             <Slide direction="right" in={true} timeout={1000} mountOnEnter unmountOnExit >
                                 <Grid item xs>
-                                    <Button startIcon={<FacebookIcon color="primary" />} fullWidth onClick={iniciarSesionF} variant="contained" >Facebook</Button>
+                                    <Button startIcon={<FacebookIcon style={{color:"blue"}} />} fullWidth onClick={iniciarSesionF} variant="contained" >Facebook</Button>
                                 </Grid>
                             </Slide>
                             <Slide direction="up" in={true} timeout={1000} mountOnEnter unmountOnExit >

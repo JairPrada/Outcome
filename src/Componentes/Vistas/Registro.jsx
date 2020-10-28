@@ -93,7 +93,7 @@ const Registro = (props) => {
                         </div>
                     </Slide>
                     <Slide direction="right" in={true} timeout={2000} mountOnEnter unmountOnExit >
-                        <Button variant="contained" id="menu" color="secondary"  endIcon={<ArrowForwardIcon />} onClick={crearUsuario} fullWidth >Registrarse</Button>
+                        <Button variant="contained" id="menu" color="primary"  endIcon={<ArrowForwardIcon />} onClick={crearUsuario} fullWidth >Registrarse</Button>
                     </Slide>
                 </form>
             </Container>
