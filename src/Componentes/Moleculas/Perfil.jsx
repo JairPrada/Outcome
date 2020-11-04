@@ -52,9 +52,7 @@ const Perfil = ({ usuario }) => {
                         </Grid>
                     </Paper>
                 </Slide>
-
             </Container>
-
         </Fragment>
 
     )

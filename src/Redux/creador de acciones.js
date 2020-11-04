@@ -23,4 +23,5 @@ const cerrarAlerta=()=>(
         type:CERRAR_ALERTA,
     }
 )
+
 export { EstadoSesion,EstadoAlerta,cerrarAlerta }

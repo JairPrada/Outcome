@@ -53,6 +53,7 @@ const Login = (props) => {
             }
         }
     }
+
     const cambiar = (e) => {
         if (e.target.name === "email") {
             console.log("estamaos modificanodo el email")

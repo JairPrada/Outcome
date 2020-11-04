@@ -12,7 +12,7 @@ function App(props) {
   return (
     <ThemeProvider theme={theme}>
       <Fragment>
-        <Provider store={Store} >
+        <Provider store={Store}>
           <Rutas />
           <Alerta />
         </Provider>
