@@ -16,7 +16,7 @@
 .icono {
   height: 100px;
 }
-.perfiles{
+.perfiles {
   padding: 50px;
   border: 1px solid black;
   border-radius: 1rem;
@@ -41,8 +41,8 @@
 .mb {
   margin-bottom: 50px;
 }
-#Perfil{
-  background-color:#100016fa;
+#Perfil {
+  background-color: #100016fa;
   color: white;
 }
 #text-white {
@@ -50,10 +50,10 @@
   text-decoration: none;
 }
 #error {
-  background-color: rgb(122, 0, 0);
+  background-color: #19212b;
   color: white;
 }
 #success {
-  background-color: rgb(0, 133, 55);
+  background-color: #19212b;
   color: white;
 }

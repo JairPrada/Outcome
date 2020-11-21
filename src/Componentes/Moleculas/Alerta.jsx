@@ -1,31 +1,28 @@
 import React, { Fragment } from "react";
-import { Slide, Snackbar } from '@material-ui/core';
+import {Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { connect } from "react-redux";
-import { cerrarAlerta } from "../../Redux/creador de acciones";
+import { cerrarAlerta } from "../../Redux/reducer/creador de acciones";
 const Alerta = (props) => {
-
     return (
         <Fragment>
-            <Snackbar open={props.open} transitionDuration={1000} autoHideDuration={6000} anchorOrigin={{
+            <Snackbar open={props.alerta.open}  autoHideDuration={6000} anchorOrigin={{
                 vertical: 'top',
-                horizontal: 'center',
+                horizontal: 'right',
             }} onClose={props.handleClose}>
-                <Slide direction="up" in={true} timeout={1000} mountOnEnter unmountOnExit >
-                    <Alert id={props.tipo} onClose={props.handleClose}  severity={props.tipo}>
-                        {props.contenido}
-                    </Alert>
-                </Slide>
-
+                <Alert id={props.alerta.tipo} onClose={props.handleClose} severity={props.alerta.tipo}>
+                    {props.alerta.contenido}
+                </Alert>
             </Snackbar>
         </Fragment>
     )
 }
-
 const mapStateToProps = state => ({
-    open: state.open,
-    contenido: state.contenido,
-    tipo: state.tipo
+    alerta: {
+        open: state.alerta.open,
+        contenido: state.alerta.contenido,
+        tipo: state.alerta.tipo
+    }
 })
 const mapDispatchToProps = dispatch => ({
     handleClose() {

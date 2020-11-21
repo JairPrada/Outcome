@@ -1,11 +1,10 @@
-import { Button, Container, Grid, Slide, TextField, Typography } from "@material-ui/core";
+import { Button, Container, Grid, Paper, Slide, TextField, Typography } from "@material-ui/core";
 import React, { Fragment, useState, useEffect } from "react";
-import { db, Autenticado } from "../../FirebaseConfig";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { connect } from "react-redux";
-import { EstadoAlerta } from "../../Redux/creador de acciones";
-
+import { EstadoAlerta, CrearUsuario } from "../../Redux/reducer/creador de acciones";
+import { Usuario} from "../../clases/clases";
 const Registro = (props) => {
     const [state, setState] = useState({
         nombre: "",
@@ -26,40 +25,12 @@ const Registro = (props) => {
                 setSeleccion({ paises: data })
             })
     }, []);
-    const crearUsuario = async (e) => {
-        try {
-            const resultado = await Autenticado.createUserWithEmailAndPassword(state.correo, state.contraseña);
-            const configuration = {
-                url: "https://reactfirebase-e716a.web.app"
-            }
-            await db.collection("usuarios").doc().set(state)
-            await resultado.user.sendEmailVerification(configuration);
-            await Autenticado.signOut();
-            const mensaje = {
-                open: true,
-                contenido: "Estas a un paso de crear tu cuenta verifica tu correo electronico",
-                tipo: "success"
-            }
-            props.estadoAlerta(mensaje)
-        } catch (error) {
-            console.log(error)
-            if (error.code === "auth/email-already-in-use") {
-                const mensaje = {
-                    open: true,
-                    contenido: "La dirección de correo electrónico ya está siendo utilizada por otra cuenta.",
-                    tipo: "error"
-                }
-                props.estadoAlerta(mensaje)
-            }
-            if (error.code === "auth/weak-password") {
-                const mensaje = {
-                    open: true,
-                    contenido: "La contraseña debe tener al menos 6 caracteres",
-                    tipo: "error"
-                }
-                props.estadoAlerta(mensaje)
-            }
-        }
+    const validarDatos=()=>{
+    }
+    const nuevoUsuario = (e) => {
+        validarDatos()
+        const UsuarioNuevo = new Usuario(state.nombre, state.apellido, state.pais, state.bandera, state.correo,state.contraseña);
+        props.nuevoUsuarioP(UsuarioNuevo)
     }
     const cambiar = (e) => {
         let flag = ""
@@ -102,19 +73,37 @@ const Registro = (props) => {
     }
     return (
         <Fragment>
-            <Container maxWidth="xs" className="roots">
-                <form className="m mb" autoComplete="off" noValidate>
-                    <Slide direction="down" in={true} timeout={1000} mountOnEnter unmountOnExit >
-                        <div>
-                            <Typography className="text-center" variant="h3" gutterBottom>Registrate</Typography>
-                            <br></br>
-                            <Typography className="text-center" varian="h1"> <AccountCircleIcon style={{ fontSize: 80 }} color="secondary" id="menuC" className="icono" /></Typography>
-                            <br></br>
-                            <TextField fullWidth label="Nombre" name="nombre" onChange={cambiar} helperText="Ingresa tu nombre" color="secondary" variant="outlined"></TextField>
-                            <br></br>
-                            <TextField fullWidth label="Apellido" name="apellido" onChange={cambiar} helperText="Ingresa tu apellido" variant="outlined"></TextField>
-                            <br></br>
-                            <Grid container>
+            <Container maxWidth="sm" className="m">
+                <Paper elevation={3} style={{ padding: "40px 50px", background: "#F5F5F5" }}>
+                    <div>
+                        <Slide direction="left" in={true} timeout={1000} mountOnEnter unmountOnExit>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <Typography className="text-center" variant="h3" gutterBottom>Registrate</Typography>
+                                </Grid>
+                            </Grid>
+                        </Slide>
+                        <Slide direction="right" in={true} timeout={1000} mountOnEnter unmountOnExit>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <Typography className="text-center" varian="h1"> <AccountCircleIcon style={{ fontSize: 80, color: "#648DAE" }} color="secondary" id="menuC" className="icono" /></Typography>
+                                </Grid>
+                            </Grid>
+                        </Slide>
+                        <Grid container spacing={2}>
+                            <Slide direction="right" in={true} timeout={2000} mountOnEnter unmountOnExit>
+                                <Grid item xs={6}>
+                                    <TextField fullWidth label="Nombre" name="nombre" onChange={cambiar} helperText="Ingresa tu nombre" variant="outlined"></TextField>
+                                </Grid>
+                            </Slide>
+                            <Slide direction="left" in={true} timeout={2000} mountOnEnter unmountOnExit>
+                                <Grid item xs={6}>
+                                    <TextField fullWidth label="Apellido" name="apellido" onChange={cambiar} helperText="Ingresa tu apellido" variant="outlined"></TextField>
+                                </Grid>
+                            </Slide>
+                        </Grid>
+                        <Slide direction="left" in={true} timeout={2000} mountOnEnter unmountOnExit>
+                            <Grid container spacing={2}>
                                 <Grid item xs={9}>
                                     <TextField select fullWidth label="Pais" name="pais" value={state.pais} onChange={cambiar} SelectProps={{
                                         native: true
@@ -129,21 +118,28 @@ const Registro = (props) => {
                                         }
                                     </TextField>
                                 </Grid>
-                                <Grid item xs={1}>
-                                </Grid>
-                                <Grid item xs={2}>
-                                    <img src={state.bandera} alt={state.name} width="100%" />
+                                <Grid item xs={3}>
+                                    <img src={state.bandera} alt={state.name} height="50px" />
                                 </Grid>
                             </Grid>
-                            <br></br>
-                            <TextField fullWidth label="Correo" typeof="email" name="correo" onChange={cambiar} type="email" helperText="Ingresa tu correo" variant="outlined"></TextField>
-                            <TextField fullWidth label="Contraseña" name="contraseña" onChange={cambiar} type="password" helperText="Ingresa tu nombre" variant="outlined"></TextField>
-                        </div>
-                    </Slide>
+                        </Slide>
+                        <Grid container spacing={3}>
+                            <Slide direction="right" in={true} timeout={2100} mountOnEnter unmountOnExit>
+                                <Grid item xs={6}>
+                                    <TextField fullWidth label="Correo" typeof="email" name="correo" onChange={cambiar} type="email" helperText="Ingresa tu correo" variant="outlined"></TextField>
+                                </Grid>
+                            </Slide>
+                            <Slide direction="left" in={true} timeout={2000} mountOnEnter unmountOnExit>
+                                <Grid item xs={6}>
+                                    <TextField fullWidth label="Contraseña" name="contraseña" onChange={cambiar} type="password" helperText="Ingresa tu nombre" variant="outlined"></TextField>
+                                </Grid>
+                            </Slide>
+                        </Grid>
+                    </div>
                     <Slide direction="right" in={true} timeout={2000} mountOnEnter unmountOnExit >
-                        <Button variant="contained" id="menu" color="primary" endIcon={<ArrowForwardIcon />} onClick={crearUsuario} fullWidth >Registrarse</Button>
+                        <Button variant="contained" id="menu" color="primary" endIcon={<ArrowForwardIcon />} onClick={nuevoUsuario} fullWidth >Registrarse</Button>
                     </Slide>
-                </form>
+                </Paper>
             </Container>
         </Fragment >
     )
@@ -152,6 +148,9 @@ const mapStateToProps = () => ({})
 const mapDispatchToProps = (dispatch) => ({
     estadoAlerta(mensaje) {
         dispatch(EstadoAlerta(mensaje))
+    },
+    nuevoUsuarioP(usuario) {
+        dispatch(CrearUsuario(usuario))
     }
 })
 

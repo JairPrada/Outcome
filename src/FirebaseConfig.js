@@ -19,8 +19,6 @@ export const Facebook = new firebase.auth.FacebookAuthProvider();
 export const Google = new firebase.auth.GoogleAuthProvider();
 export const Github= new firebase.auth.GithubAuthProvider();
 
-
-
 /*
 class FirebaseObject{
     constructor(){
