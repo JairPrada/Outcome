@@ -1,4 +1,4 @@
-import { ESTADO_SESION, MENSAJE_ALERTA, CERRAR_ALERTA, CREAR_USUARIO, INICIAR_SESION, EDITAR_USUARIO, CREAR_PROBLEMA } from "../actions/actions";
+import { ESTADO_SESION, MENSAJE_ALERTA, CERRAR_ALERTA, CREAR_USUARIO, INICIAR_SESION, EDITAR_USUARIO, CREAR_PROBLEMA, CERRAR_SESION} from "../actions/actions";
 import { Autenticado, db } from "../../FirebaseConfig";
 const EstadoSesion = estado => (
     {
@@ -25,10 +25,8 @@ const IniciarSesion = (usuario) => dispatch => {
     Autenticado.signInWithEmailAndPassword(usuario.correo, usuario.contraseña)
         .then(resultado => {
             if (resultado.user.emailVerified === true) {
-                console.log("Correo verificado")
                 db.collection("Usuarios").doc(resultado.user.uid).get()
                     .then(datos => {
-                        console.log(datos.data())
                         return dispatch({
                             type: INICIAR_SESION,
                             usuario: {
@@ -60,7 +58,6 @@ const IniciarSesion = (usuario) => dispatch => {
                 })
             }
         }).catch(error => {
-            console.log(error)
             if (error.code === "auth/wrong-password") {
                 return dispatch({
                     type: INICIAR_SESION,
@@ -84,7 +81,6 @@ const IniciarSesion = (usuario) => dispatch => {
         })
 }
 const CrearUsuario = (datos) => dispatch => {
-    console.log(datos)
     Autenticado.createUserWithEmailAndPassword(datos.correo, datos.contraseña)
         .then(resultado => {
             const configuration = {
@@ -97,7 +93,7 @@ const CrearUsuario = (datos) => dispatch => {
                         type: CREAR_USUARIO,
                         alerta: {
                             open: true,
-                            contenido: "Estas a un paso de crear tu cuenta verifica tu correo electronico",
+                            contenido: "Estas a un paso de crear tu cuenta, verifica tu correo electronico",
                             tipo: "success"
                         }
                     })
@@ -149,7 +145,6 @@ const EditarUsuario = (usuario) => dispatch => {
         })
 }
 const CrearProblemaF = (datosProblema) => dispatch => {
-    console.log(datosProblema)
     db.collection("Problemas").doc().set(Object.assign({}, datosProblema))
         .then(resultas => {
             return dispatch({
@@ -162,4 +157,25 @@ const CrearProblemaF = (datosProblema) => dispatch => {
             })
         })
 }
-export { EstadoSesion, EstadoAlerta, cerrarAlerta, CrearUsuario, IniciarSesion, EditarUsuario, CrearProblemaF }
+const TraerProblemas = () => dispatch => {
+    
+}
+const CerrarSesion = () => dispatch => {
+    Autenticado.signOut();
+    return dispatch({
+        type: CERRAR_SESION,
+        usuario: {
+            id: "",
+            nombre: "",
+            pais: "",
+            bandera: "",
+            correo: ""
+        },
+        alerta: {
+            open: true,
+            contenido: "Has cerrado sesion correctamente",
+            tipo: "success"
+        }
+    })
+}
+export { EstadoSesion, EstadoAlerta, cerrarAlerta, CrearUsuario, IniciarSesion, EditarUsuario, TraerProblemas, CrearProblemaF, CerrarSesion }

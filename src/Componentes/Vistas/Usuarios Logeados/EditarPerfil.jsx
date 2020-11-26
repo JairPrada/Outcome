@@ -4,11 +4,16 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { EditarUsuario } from "../../../Redux/reducer/creador de acciones";
+import { EditarUsuario, EstadoAlerta } from "../../../Redux/reducer/creador de acciones";
 const EditarPerfil = (props) => {
     useEffect(() => {
         if (props.sesion === false) {
-            alert("no tiene sesion iniciada")
+            const alerta={
+                open:true,
+                contenido:"Tu sesion se ha terminado, vuelve a iniciar para acceder a las funcionalidades de Outcome",
+                tipo:"error"
+            }
+            props.mostrarAlerta(alerta)
             props.history.push("/")
         }
     });
@@ -71,8 +76,10 @@ const EditarPerfil = (props) => {
         }
     }
     const editarU = (e) => {
-        props.editarUsuario(state)
-        props.history.push("/perfil")
+        if (window.confirm("Esta seguro que desea cambiar la informacion de su perfil")) {
+            props.editarUsuario(state)
+            props.history.push("/perfil")
+        }
     }
     return (
         <Fragment>
@@ -146,5 +153,8 @@ const mapDispatchToProps = dispatch => ({
     editarUsuario(usuario) {
         dispatch(EditarUsuario(usuario))
     },
+    mostrarAlerta(alerta){
+        dispatch(EstadoAlerta(alerta))
+    }
 })
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EditarPerfil));

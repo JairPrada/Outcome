@@ -5,12 +5,17 @@ import PerfilBanner from "../../../Medios/Videos/Perfil.mp4";
 import { withRouter } from 'react-router-dom';
 import EmailIcon from '@material-ui/icons/Email';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import { EstadoAlerta } from "../../../Redux/reducer/creador de acciones";
 
 const Perfil = (props) => {
     useEffect(() => {
         if (props.sesion === false) {
-            alert("no tienes una sesion iniciada")
-            props.history.push("/")
+            const alerta = {
+                open: true,
+                contenido: "Tu sesion se ha terminado, vuelve a iniciar para acceder a las funcionalidades de Outcome",
+                tipo: "error"
+            }
+            props.mostrarAlerta(alerta)
         }
     });
     const editar = () => {
@@ -70,5 +75,9 @@ const mapStateToProps = state => (
         sesion: state.sesion
     }
 )
-const mapDispatchToProps = (state) => ({})
+const mapDispatchToProps = dispatch => ({
+    mostrarAlerta(alerta){
+        dispatch(EstadoAlerta(alerta))
+    }
+})
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Perfil))

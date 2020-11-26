@@ -4,12 +4,17 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ImageUploader from 'react-images-upload';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import { connect } from "react-redux";
-import { CrearProblemaF } from "../../../Redux/reducer/creador de acciones";
+import { CrearProblemaF, EstadoAlerta } from "../../../Redux/reducer/creador de acciones";
 
 const CrearProblema = (props) => {
     useEffect(() => {
         if (props.sesion === false) {
-            alert("no tiene sesion iniciada")
+            const alerta = {
+                open: true,
+                contenido: "Tu sesion se ha terminado, vuelve a iniciar para acceder a las funcionalidades de Outcome",
+                tipo: "error"
+            }
+            props.mostrarAlerta(alerta)
             props.history.push("/")
         }
     });
@@ -48,8 +53,8 @@ const CrearProblema = (props) => {
         })
     }
     const subir = () => {
-        props.crearProblema(state)
-        props.history.push("/listaProblemas")
+            props.crearProblema(state)
+            props.history.push("/listaProblemas")
     }
     const categorias = ["Matematicas", "Lenguas", "Quimica", "Informatica"]
     return (
@@ -130,5 +135,8 @@ const mapDispatchToProps = dispatch => ({
     crearProblema(usuario) {
         dispatch(CrearProblemaF(usuario))
     },
+    mostrarAlerta(alerta) {
+        dispatch(EstadoAlerta(alerta))
+    }
 })
 export default connect(mapStateToProps, mapDispatchToProps)(CrearProblema);
